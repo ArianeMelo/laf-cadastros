@@ -25,8 +25,12 @@ namespace LAF.Cadastros.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            InjecaoDependencia.Registra();
+            services
+                .AddControllers()
+                .AddNewtonsoftJson();
+            InjecaoDependencia.Registra(services);
+            
+            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

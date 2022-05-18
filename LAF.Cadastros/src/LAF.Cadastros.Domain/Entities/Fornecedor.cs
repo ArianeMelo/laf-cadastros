@@ -12,5 +12,9 @@ namespace LAF.Cadastros.Domain
         public int TipoFornecedor { get; set; }
         public bool FornecedorAtivo { get; set; }
 
+        public Fornecedor()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }
