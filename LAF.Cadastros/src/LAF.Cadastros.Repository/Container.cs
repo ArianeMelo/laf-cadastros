@@ -12,6 +12,7 @@ namespace LAF.Cadastros.Repository
             {
                 configurar.AddMap(new FornecedorMap());
                 configurar.AddMap(new ProdutoMap());
+                configurar.AddMap(new EnderecoMap());
                 configurar.ForDommel();
             });
         }

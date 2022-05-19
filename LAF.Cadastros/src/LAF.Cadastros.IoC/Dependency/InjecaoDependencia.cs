@@ -16,10 +16,12 @@ namespace LAF.Cadastros.IoC.Dependency
             //Repository
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IEnderecoRepository, EnderecoRepository>();
 
             //Application
             services.AddScoped<IFornecedorApplication, FornecedorApplication>();
             services.AddScoped<IProdutoApplication, ProdutoApplication>();
+            services.AddScoped<IEnderecoApplication, EnderecoApplication>();
         }     
     }
 }
