@@ -11,6 +11,7 @@ namespace LAF.Cadastros.Repository
             FluentMapper.Initialize(configurar =>
             {
                 configurar.AddMap(new FornecedorMap());
+                configurar.AddMap(new ProdutoMap());
                 configurar.ForDommel();
             });
         }

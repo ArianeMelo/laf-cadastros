@@ -15,9 +15,11 @@ namespace LAF.Cadastros.IoC.Dependency
 
             //Repository
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
             //Application
             services.AddScoped<IFornecedorApplication, FornecedorApplication>();
+            services.AddScoped<IProdutoApplication, ProdutoApplication>();
         }     
     }
 }
