@@ -19,5 +19,10 @@ namespace LAF.Cadastros.Application
         {
             _produtoRepository.Adicionar(produto);
         }
+
+        public void Alterar (Produto produto)
+        {
+            _produtoRepository.Alterar(produto);
+        }
     }
 }

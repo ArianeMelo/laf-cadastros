@@ -18,5 +18,13 @@ namespace LAF.Cadastros.Repository.Repository
                 db.Insert(produto);
             }
         }
+
+        public void Alterar (Produto produto)
+        {
+            using (SqlConnection db = new SqlConnection(_connection))
+            {
+                db.Update(produto);
+            }
+        }
     }
 }
