@@ -12,7 +12,7 @@ namespace LAF.Cadastros.Repository.Mappings
         {
             
             ToTable("Fornecedores"); //Escrever o nome da tabela , de como está no banco,  que se refere a classe que esta sendo mapeada.
-            Map(fornecedor => fornecedor.Id).ToColumn("Id");
+            Map(fornecedor => fornecedor.Id).ToColumn("Id").IsKey();
             Map(fornecedor => fornecedor.Nome).ToColumn("Nome");
             Map(fornecedor => fornecedor.Documento).ToColumn("Documento");
             Map(fornecedor => fornecedor.TipoFornecedor).ToColumn("TipoFornecedor");

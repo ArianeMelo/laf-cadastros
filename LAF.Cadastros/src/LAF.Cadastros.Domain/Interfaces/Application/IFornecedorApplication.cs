@@ -6,11 +6,10 @@ using System.Text;
 namespace LAF.Cadastros.Domain.Interfaces.Application
 {
     public interface IFornecedorApplication
-    {        
-        public void Adicionar(Fornecedor fornecedor)
-        {
-
-        }
+    {
+        void Adicionar(Fornecedor fornecedor);
+        void Alterar(Fornecedor fornecedor);
+        
         
     }
 }

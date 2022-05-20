@@ -19,5 +19,10 @@ namespace LAF.Cadastros.Application
         {
             _fornecedorRepository.Adicionar(fornecedor);
         }
+
+        public void Alterar(Fornecedor fornecedor)
+        {
+            _fornecedorRepository.Alterar(fornecedor);
+        }
     }
 }

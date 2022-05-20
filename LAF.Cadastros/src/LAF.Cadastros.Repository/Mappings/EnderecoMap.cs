@@ -11,7 +11,7 @@ namespace LAF.Cadastros.Repository.Mappings
         public EnderecoMap()
         {
             ToTable("Enderecos");
-            Map(endereco => endereco.Id).ToColumn("Id");
+            Map(endereco => endereco.Id).ToColumn("Id").IsKey(); 
             Map(endereco => endereco.FornecedorId).ToColumn("FornecedorId");
             Map(endereco => endereco.Logradouro).ToColumn("Logradouro");
             Map(endereco => endereco.Numero).ToColumn("Numero");

@@ -7,9 +7,7 @@ namespace LAF.Cadastros.Domain.Interfaces.Application
 {
     public interface IEnderecoApplication
     {
-        public void Adicionar (Endereco endereco)
-        {
-
-        }
+        void Adicionar(Endereco endereco);
+        
     }
 }

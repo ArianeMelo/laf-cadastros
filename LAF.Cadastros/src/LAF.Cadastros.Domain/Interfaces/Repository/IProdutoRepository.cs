@@ -7,6 +7,6 @@ namespace LAF.Cadastros.Domain.Interfaces.Repository
 {
     public interface IProdutoRepository
     {
-        public void Adicionar(Produto produto);
+        void Adicionar(Produto produto);
     }
 }

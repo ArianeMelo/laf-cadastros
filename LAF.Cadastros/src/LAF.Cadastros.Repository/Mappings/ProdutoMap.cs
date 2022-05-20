@@ -11,7 +11,7 @@ namespace LAF.Cadastros.Repository.Mappings
         public ProdutoMap()
         {
             ToTable("Produtos");
-            Map(produto => produto.Id).ToColumn("Id");
+            Map(produto => produto.Id).ToColumn("Id").IsKey(); 
             Map(produto => produto.FornecedorId).ToColumn("FornecedorId");
             Map(produto => produto.Nome).ToColumn("Nome");
             Map(produto => produto.Descricao).ToColumn("Descricao");

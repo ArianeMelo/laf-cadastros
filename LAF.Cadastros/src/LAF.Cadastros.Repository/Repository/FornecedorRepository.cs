@@ -1,4 +1,5 @@
-﻿using Dommel;
+﻿using Dapper;
+using Dommel;
 using LAF.Cadastros.Domain;
 using LAF.Cadastros.Domain.Interfaces.Repository;
 using System;
@@ -19,5 +20,14 @@ namespace LAF.Cadastros.Repository.Repository
                 db.Insert(fornecedor);
             }
         }
+
+        public void Alterar(Fornecedor fornecedor)
+        {
+            using (SqlConnection db = new SqlConnection(_connection))
+            {
+                db.Update(fornecedor);
+            }
+        }
     }
+
 }
