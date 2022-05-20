@@ -14,11 +14,20 @@ namespace LAF.Cadastros.Repository.Repository
 
        public void Adicionar(Endereco endereco)
        {
-            using (SqlConnection db = new SqlConnection(_connection))
-            {
-                db.Insert(endereco);
-            }
+          using (SqlConnection db = new SqlConnection(_connection))
+          {
+             db.Insert(endereco);
+          }
        }
+       public void Alterar (Endereco endereco)
+       {
+          using (SqlConnection db = new SqlConnection(_connection))
+          {
+              db.Update(endereco);
+          }
+       }
+
+
 
         
     }

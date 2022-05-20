@@ -20,5 +20,10 @@ namespace LAF.Cadastros.Application
         {
             _enderecoRepository.Adicionar(endereco);
         }
+
+        public void Alterar (Endereco endereco)
+        {
+            _enderecoRepository.Alterar(endereco);
+        }
     }
 }
