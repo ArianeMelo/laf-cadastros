@@ -12,11 +12,11 @@ namespace LAF.Cadastros.API.Controllers
     [ApiController]
     public class FornecedorController : ControllerBase
     {
-        private readonly IFornecedorApplication _fornecedorAppication;
+        private readonly IFornecedorApplication _fornecedorApplication;
 
         public FornecedorController(IFornecedorApplication fornecedorApplication)
         {
-            _fornecedorAppication = fornecedorApplication;
+            _fornecedorApplication = fornecedorApplication;
         }
 
         [HttpPost]
@@ -30,7 +30,7 @@ namespace LAF.Cadastros.API.Controllers
                 FornecedorAtivo = fornecedorPostViewModel.FornecedorAtivo,
 
             };
-            _fornecedorAppication.Adicionar(fornecedor);
+            _fornecedorApplication.Adicionar(fornecedor);
 
             return Ok(fornecedor);
         }
@@ -47,9 +47,24 @@ namespace LAF.Cadastros.API.Controllers
                 FornecedorAtivo = fornecedorPutViewModel.FornecedorAtivo,
 
             };
-            _fornecedorAppication.Alterar(fornecedor);
+            _fornecedorApplication.Alterar(fornecedor);
 
             return Ok(fornecedor);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Excluir (Guid id)
+        {
+            Fornecedor fornecedor = new Fornecedor
+            {
+                Id = id,               
+            };
+
+            _fornecedorApplication.Excluir(fornecedor);
+
+            return Ok(fornecedor);
+
+            
         }
 
 

@@ -24,5 +24,10 @@ namespace LAF.Cadastros.Application
         {
             _fornecedorRepository.Alterar(fornecedor);
         }
+
+        public void Excluir(Fornecedor fornecedor)
+        {
+            _fornecedorRepository.Excluir(fornecedor);
+        }
     }
 }
