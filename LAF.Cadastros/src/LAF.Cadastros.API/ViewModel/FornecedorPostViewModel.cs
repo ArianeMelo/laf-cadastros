@@ -17,8 +17,8 @@ namespace LAF.Cadastros.API.ViewModel
         [JsonProperty("tipo_fornecedor")]
         public int TipoFornecedor { get; set; }
 
-        [JsonProperty("fornecedor_ativo")]
-        public bool FornecedorAtivo { get; set; }
+        [JsonProperty("ativo")]
+        public bool Ativo { get; set; }
 
     }
 }

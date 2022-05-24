@@ -16,7 +16,7 @@ namespace LAF.Cadastros.Repository.Mappings
             Map(fornecedor => fornecedor.Nome).ToColumn("Nome");
             Map(fornecedor => fornecedor.Documento).ToColumn("Documento");
             Map(fornecedor => fornecedor.TipoFornecedor).ToColumn("TipoFornecedor");
-            Map(fornecedor => fornecedor.FornecedorAtivo).ToColumn("Ativo");
+            Map(fornecedor => fornecedor.Ativo).ToColumn("Ativo");
 
         }
     }

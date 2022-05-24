@@ -10,7 +10,7 @@ namespace LAF.Cadastros.Domain
         public string Nome { get; set; }
         public string Documento  { get; set; }
         public int TipoFornecedor { get; set; }
-        public bool FornecedorAtivo { get; set; }
+        public bool Ativo { get; set; }
 
         public Fornecedor()
         {
