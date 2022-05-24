@@ -9,6 +9,7 @@ namespace LAF.Cadastros.Domain.Interfaces.Repository
     {
         void Adicionar(Endereco endereco);
         void Alterar(Endereco endereco);
+        void Excluir(Endereco endereco);
         
     }
 }

@@ -25,5 +25,10 @@ namespace LAF.Cadastros.Application
         {
             _enderecoRepository.Alterar(endereco);
         }
+
+        public void Excluir(Endereco endereco)
+        {
+            _enderecoRepository.Excluir(endereco); 
+        }
     }
 }

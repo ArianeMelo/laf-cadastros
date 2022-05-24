@@ -9,6 +9,6 @@ namespace LAF.Cadastros.Domain.Interfaces.Application
     {
         void Adicionar(Endereco endereco);
         void Alterar(Endereco endereco);
-        
+        void Excluir(Endereco endereco);        
     }
 }

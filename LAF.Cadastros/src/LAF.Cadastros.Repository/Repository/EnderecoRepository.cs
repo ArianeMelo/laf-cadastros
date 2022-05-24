@@ -27,6 +27,14 @@ namespace LAF.Cadastros.Repository.Repository
           }
        }
 
+        public void Excluir (Endereco endereco)
+        {
+            using (SqlConnection db = new SqlConnection(_connection))
+            {
+                db.Delete(endereco);
+            }
+        }
+
 
 
         

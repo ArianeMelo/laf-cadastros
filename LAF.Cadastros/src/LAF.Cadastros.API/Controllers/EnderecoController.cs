@@ -61,5 +61,18 @@ namespace LAF.Cadastros.API.Controllers
 
             return Ok(endereco);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Excluir(Guid id)
+        {
+            Endereco endereco = new Endereco
+            {
+                Id = id
+            };
+
+            _enderecoApplication.Excluir(endereco);
+
+            return Ok();
+        }
     }
 }
