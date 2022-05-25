@@ -51,5 +51,17 @@ namespace LAF.Cadastros.API.Controllers
 
             return Ok(produto);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Excluir(Guid id)
+        {
+            Produto produto = new Produto
+            {
+                Id = id
+            };
+            _produtoApplication.Excluir(produto);
+
+            return Ok();            
+        }
     }
 }

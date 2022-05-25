@@ -26,5 +26,13 @@ namespace LAF.Cadastros.Repository.Repository
                 db.Update(produto);
             }
         }
+
+        public void Excluir(Produto produto)
+        {
+            using (SqlConnection db = new SqlConnection(_connection))
+            {
+                db.Delete(produto);
+            }
+        }
     }
 }

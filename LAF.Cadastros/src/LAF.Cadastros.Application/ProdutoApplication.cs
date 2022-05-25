@@ -24,5 +24,10 @@ namespace LAF.Cadastros.Application
         {
             _produtoRepository.Alterar(produto);
         }
+
+        public void Excluir(Produto produto)
+        {
+            _produtoRepository.Excluir(produto);
+        }
     }
 }
