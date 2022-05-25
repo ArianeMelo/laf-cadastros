@@ -114,7 +114,7 @@ namespace LAF.Cadastros.API.Controllers
             Endereco endereco = _enderecoApplication.ObterPorId(id);
 
             if (endereco == null)
-                return NotFound("Fornecedor não existe");
+                return NotFound("Endereço não encontrado");
 
             endereco.Id = id;
 
