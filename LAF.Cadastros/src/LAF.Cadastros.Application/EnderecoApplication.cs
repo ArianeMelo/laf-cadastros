@@ -1,4 +1,5 @@
-﻿using LAF.Cadastros.Domain.Entities;
+﻿using LAF.Cadastros.Domain;
+using LAF.Cadastros.Domain.Entities;
 using LAF.Cadastros.Domain.Interfaces.Application;
 using LAF.Cadastros.Domain.Interfaces.Repository;
 using System;
@@ -16,6 +17,16 @@ namespace LAF.Cadastros.Application
             _enderecoRepository = enderecoRepository;
         }
 
+        public Endereco ObterPorId(Guid id)
+        {
+            return _enderecoRepository.ObterPorId(id);
+        }
+
+        public IEnumerable<Endereco> ObterTodos()
+        {
+            return _enderecoRepository.ObterTodos();
+        }
+
         public void Adicionar (Endereco endereco)
         {
             _enderecoRepository.Adicionar(endereco);
@@ -30,5 +41,7 @@ namespace LAF.Cadastros.Application
         {
             _enderecoRepository.Excluir(endereco); 
         }
+
+      
     }
 }

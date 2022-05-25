@@ -1,4 +1,5 @@
 ﻿using Dommel;
+using LAF.Cadastros.Domain;
 using LAF.Cadastros.Domain.Entities;
 using LAF.Cadastros.Domain.Interfaces.Repository;
 using System;
@@ -34,9 +35,20 @@ namespace LAF.Cadastros.Repository.Repository
                 db.Delete(endereco);
             }
         }
+        public Endereco ObterPorId(Guid id)
+        {
+            using (SqlConnection db = new SqlConnection(_connection))
+            {
+                return db.Get<Endereco>(id);
+            }
+        }
 
-
-
-        
+        public IEnumerable<Endereco> ObterTodos()
+        {
+            using(SqlConnection db = new SqlConnection(_connection))
+            {
+                return db.GetAll<Endereco>(); 
+            }
+        }
     }
 }

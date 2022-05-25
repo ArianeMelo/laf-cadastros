@@ -39,14 +39,14 @@ namespace LAF.Cadastros.API.Controllers
         [HttpGet("filtros/{documento}")]
         public IActionResult Buscar(string documento)
         {
-            return Ok(_fornecedorApplication.Buscar(fornecedor => fornecedor.Documento == documento));
+            return Ok(_fornecedorApplication.Buscar(forn => forn.Documento == documento));
         }
 
         [HttpPost]
         public IActionResult Adicionar(FornecedorPostViewModel fornecedorPostViewModel)
         {
 
-            Fornecedor fornecedor = _fornecedorApplication.Buscar(fornecedor => fornecedor.Documento == fornecedorPostViewModel.Documento).FirstOrDefault();
+            Fornecedor fornecedor = _fornecedorApplication.Buscar(forn => forn.Documento == fornecedorPostViewModel.Documento).FirstOrDefault();
 
             if (fornecedor != null)
             {

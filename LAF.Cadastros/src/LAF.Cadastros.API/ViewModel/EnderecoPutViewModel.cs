@@ -11,7 +11,7 @@ namespace LAF.Cadastros.API.ViewModel
         [JsonProperty("fornecedor_id")]
         public Guid FornecedorId { get; set; }
 
-        [JsonProperty("endereco")]
+        [JsonProperty("logradouro")]
         public string Logradouro { get; set; }
 
         [JsonProperty("numero")]
