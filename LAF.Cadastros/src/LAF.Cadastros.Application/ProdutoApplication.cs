@@ -15,6 +15,7 @@ namespace LAF.Cadastros.Application
         {
             _produtoRepository = produtoRepository;
         }
+       
        public void Adicionar(Produto produto)
         {
             _produtoRepository.Adicionar(produto);
@@ -28,6 +29,16 @@ namespace LAF.Cadastros.Application
         public void Excluir(Produto produto)
         {
             _produtoRepository.Excluir(produto);
+        }
+
+        public Produto ObterPorId(Guid id)
+        {
+           return _produtoRepository.ObterPorId(id);
+        }
+
+        public IEnumerable<Produto> ObterTodos()
+        {
+            return _produtoRepository.ObterTodos();
         }
     }
 }

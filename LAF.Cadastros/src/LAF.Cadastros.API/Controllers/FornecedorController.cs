@@ -20,7 +20,7 @@ namespace LAF.Cadastros.API.Controllers
             _fornecedorApplication = fornecedorApplication;
         }
 
-        [HttpGet("{id:Guid}")]
+        [HttpGet("{id}")]
         public IActionResult ObterPorId(Guid id)
         {
             Fornecedor fornecedor = _fornecedorApplication.ObterPorId(id);
@@ -48,18 +48,21 @@ namespace LAF.Cadastros.API.Controllers
 
             Fornecedor fornecedor = _fornecedorApplication.Buscar(forn => forn.Documento == fornecedorPostViewModel.Documento).FirstOrDefault();
 
-            if (fornecedor != null)
-            {
+            if (fornecedor != null)          
                 return BadRequest("Fornecedor já cadastrado");
-            }
             
+            if (String.IsNullOrEmpty(fornecedorPostViewModel.Nome))            
+                return BadRequest("Nome deve estar preenchido");
+
+            if (String.IsNullOrEmpty(fornecedorPostViewModel.Documento))
+                return BadRequest("Documento deve estar preenchido");
+
             fornecedor = new Fornecedor()
             {
                 Nome = fornecedorPostViewModel.Nome,
                 Documento = fornecedorPostViewModel.Documento,
                 TipoFornecedor = fornecedorPostViewModel.TipoFornecedor,
                 Ativo = fornecedorPostViewModel.Ativo,
-
             };
             
             _fornecedorApplication.Adicionar(fornecedor);
@@ -76,11 +79,11 @@ namespace LAF.Cadastros.API.Controllers
             if (fornecedor == null)
                 return NotFound("Fornecedor não existe");
 
-                         
-               fornecedor.Nome = fornecedorPutViewModel.Nome;
-               fornecedor.TipoFornecedor = fornecedorPutViewModel.TipoFornecedor;
-               fornecedor.Ativo = fornecedorPutViewModel.Ativo;
-                       
+            fornecedor.Nome = fornecedorPutViewModel.Nome;
+            fornecedor.TipoFornecedor = fornecedorPutViewModel.TipoFornecedor;
+            fornecedor.Ativo = fornecedorPutViewModel.Ativo;
+           
+
             _fornecedorApplication.Alterar(fornecedor);
 
             return NoContent();

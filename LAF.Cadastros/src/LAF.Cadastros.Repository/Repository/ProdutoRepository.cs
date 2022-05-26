@@ -4,6 +4,7 @@ using LAF.Cadastros.Domain.Interfaces.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace LAF.Cadastros.Repository.Repository
@@ -34,5 +35,22 @@ namespace LAF.Cadastros.Repository.Repository
                 db.Delete(produto);
             }
         }
+
+        public Produto ObterPorId(Guid id)
+        {
+            using (SqlConnection db = new SqlConnection(_connection))
+            {
+                return db.Get<Produto>(id);
+            }
+        }
+
+        public IEnumerable<Produto> ObterTodos()
+        {
+            using (SqlConnection db = new SqlConnection(_connection))
+            {
+                return db.GetAll<Produto>();
+            }
+        }
+
     }
 }

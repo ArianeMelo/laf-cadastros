@@ -7,6 +7,8 @@ namespace LAF.Cadastros.Domain.Interfaces.Repository
 {
     public interface IProdutoRepository
     {
+        Produto ObterPorId(Guid id);
+        IEnumerable<Produto> ObterTodos();
         void Adicionar(Produto produto);
         void Alterar(Produto produto);
         void Excluir(Produto produto);

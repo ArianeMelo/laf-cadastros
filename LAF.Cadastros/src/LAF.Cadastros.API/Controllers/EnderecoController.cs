@@ -52,9 +52,25 @@ namespace LAF.Cadastros.API.Controllers
             Fornecedor fornecedor = _fornecedorApplication.Buscar(forn => forn.Id == enderecoPostViewModel.FornecedorId).FirstOrDefault();
 
             if (fornecedor == null)
-            {
                 return BadRequest("Fornecedor não cadastrado");
-            }
+
+            if (String.IsNullOrEmpty(enderecoPostViewModel.Logradouro))
+                return BadRequest("Endereço deve estar preenchido");
+
+            if (String.IsNullOrEmpty(enderecoPostViewModel.Numero))
+                return BadRequest("Campo número deve estar preenchido");
+
+            if (String.IsNullOrEmpty(enderecoPostViewModel.Cep))
+                return BadRequest("Campo cep deve estar preenchido");
+
+            if (String.IsNullOrEmpty(enderecoPostViewModel.Bairro))
+                return BadRequest("Campo bairro deve estar preenchido");
+
+            if (String.IsNullOrEmpty(enderecoPostViewModel.Cidade))
+                return BadRequest("Campo Cidade deve estar preenchido");
+
+            if (String.IsNullOrEmpty(enderecoPostViewModel.Estado))
+                return BadRequest("Campo Estado deve estar preenchido");
 
             Endereco endereco = new Endereco()
             {
@@ -79,16 +95,14 @@ namespace LAF.Cadastros.API.Controllers
             Endereco endereco = _enderecoApplication.ObterPorId(id);
 
             if (endereco == null)
-            {
                 return BadRequest("Endereço não encontrado");
-            }
+           
 
             Fornecedor fornecedor = _fornecedorApplication.Buscar(forn => forn.Id == enderecoPutViewModel.FornecedorId).FirstOrDefault();
 
             if (fornecedor == null)
-            {
                 return BadRequest("Fornecedor não cadastrado");
-            }
+            
 
             endereco = new Endereco
             {
