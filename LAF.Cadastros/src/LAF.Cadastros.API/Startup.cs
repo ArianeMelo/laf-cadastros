@@ -28,8 +28,7 @@ namespace LAF.Cadastros.API
             services
                 .AddControllers()
                 .AddNewtonsoftJson();
-            InjecaoDependencia.Registra(services);
-            
+            InjecaoDependencia.Registra(services);            
             
         }
 

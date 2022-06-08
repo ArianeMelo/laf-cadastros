@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LAF.Cadastros.Repository.Repository
 {
@@ -15,51 +16,51 @@ namespace LAF.Cadastros.Repository.Repository
         private string _connection = @"Data Source=felipe-pc\SQLEXPRESS;Initial Catalog=LAF.Cadastros;User ID=sa;Password=119696";
 
        
-        public void Adicionar(Fornecedor fornecedor)
+        public async Task Adicionar(Fornecedor fornecedor)
         {
             using (SqlConnection db = new SqlConnection(_connection))
             {
-                db.Insert(fornecedor);
+                await db.InsertAsync(fornecedor);
             }
         }
 
-        public void Alterar(Fornecedor fornecedor)
+        public async Task Alterar(Fornecedor fornecedor)
         {
             using (SqlConnection db = new SqlConnection(_connection))
             {
-                db.Update(fornecedor);
+                await db.UpdateAsync (fornecedor);
             }
         }
 
-        public void Excluir (Fornecedor fornecedor)
+        public async Task Excluir (Fornecedor fornecedor)
         {
             using (SqlConnection db = new SqlConnection(_connection))
             {
-                db.Delete(fornecedor);
+                await db.DeleteAsync(fornecedor);
             }
         }
 
-        public Fornecedor ObterPorId(Guid id)
+        public async Task<Fornecedor> ObterPorId(Guid id)
         {
             using (SqlConnection db = new SqlConnection(_connection))
             {
-                return db.Get<Fornecedor>(id);
+                return await db.GetAsync<Fornecedor>(id);
             }        
         }
 
-        public IEnumerable<Fornecedor> ObterTodos()
+        public async Task<IEnumerable<Fornecedor>> ObterTodos()
         {
             using (SqlConnection db = new SqlConnection(_connection))
             {
-                return db.GetAll<Fornecedor>();
+                return await db.GetAllAsync<Fornecedor>();
             }
         }
 
-        public IEnumerable<Fornecedor> Buscar(Expression<Func<Fornecedor, bool>> where) //Campo WHERE também pode ser predicate 
+        public async Task<IEnumerable<Fornecedor>> Buscar(Expression<Func<Fornecedor, bool>> where) //Campo WHERE também pode ser predicate 
         {
             using(SqlConnection db = new SqlConnection(_connection))
             {
-                return db.Select<Fornecedor>(where); //Select é o método do Dapper que possui capacidade de converter expressão lambda em query SQL =  WHERE 
+                return await db.SelectAsync<Fornecedor>(where); //Select é o método do Dapper que possui capacidade de converter expressão lambda em query SQL =  WHERE 
             }
         }
     }

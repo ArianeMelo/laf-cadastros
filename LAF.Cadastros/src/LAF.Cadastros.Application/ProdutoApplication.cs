@@ -4,6 +4,7 @@ using LAF.Cadastros.Domain.Interfaces.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LAF.Cadastros.Application
 {
@@ -16,29 +17,29 @@ namespace LAF.Cadastros.Application
             _produtoRepository = produtoRepository;
         }
        
-       public void Adicionar(Produto produto)
+       public async Task Adicionar(Produto produto)
         {
-            _produtoRepository.Adicionar(produto);
+            await _produtoRepository.Adicionar(produto);
         }
 
-        public void Alterar (Produto produto)
+        public async Task Alterar (Produto produto)
         {
-            _produtoRepository.Alterar(produto);
+            await _produtoRepository.Alterar(produto);
         }
 
-        public void Excluir(Produto produto)
+        public async Task Excluir(Produto produto)
         {
-            _produtoRepository.Excluir(produto);
+            await _produtoRepository.Excluir(produto);
         }
 
-        public Produto ObterPorId(Guid id)
+        public async Task<Produto> ObterPorId(Guid id)
         {
-           return _produtoRepository.ObterPorId(id);
+           return await _produtoRepository.ObterPorId(id);
         }
 
-        public IEnumerable<Produto> ObterTodos()
+        public async Task<IEnumerable<Produto>> ObterTodos()
         {
-            return _produtoRepository.ObterTodos();
+            return await _produtoRepository.ObterTodos();
         }
     }
 }

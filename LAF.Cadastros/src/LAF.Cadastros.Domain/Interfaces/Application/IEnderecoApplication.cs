@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LAF.Cadastros.Domain.Interfaces.Application
 {
     public interface IEnderecoApplication
     {
-        Endereco ObterPorId(Guid id);
-        IEnumerable<Endereco> ObterTodos();
-        void Adicionar(Endereco endereco);
-        void Alterar(Endereco endereco);
-        void Excluir(Endereco endereco);        
+        Task<Endereco> ObterPorId(Guid id);
+        Task<IEnumerable<Endereco>> ObterTodos();
+        Task Adicionar(Endereco endereco);
+        Task Alterar(Endereco endereco);
+        Task Excluir(Endereco endereco);        
     }
 }

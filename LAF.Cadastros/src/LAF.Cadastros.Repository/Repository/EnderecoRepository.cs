@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LAF.Cadastros.Repository.Repository
 {
@@ -13,41 +14,40 @@ namespace LAF.Cadastros.Repository.Repository
     {
         private readonly string  _connection = @"Data Source=felipe-pc\SQLEXPRESS;Initial Catalog=LAF.Cadastros;User ID=sa;Password=119696";
 
-       public void Adicionar(Endereco endereco)
+       public async Task Adicionar(Endereco endereco)
        {
           using (SqlConnection db = new SqlConnection(_connection))
           {
-             db.Insert(endereco);
+             await db.InsertAsync(endereco);
           }
        }
-       public void Alterar (Endereco endereco)
+       public async Task Alterar (Endereco endereco)
        {
           using (SqlConnection db = new SqlConnection(_connection))
           {
-              db.Update(endereco);
+                await db.UpdateAsync(endereco);
           }
        }
-
-        public void Excluir (Endereco endereco)
+        public async Task Excluir (Endereco endereco)
         {
             using (SqlConnection db = new SqlConnection(_connection))
             {
-                db.Delete(endereco);
+                await db.DeleteAsync(endereco);
             }
         }
-        public Endereco ObterPorId(Guid id)
+        public async Task<Endereco> ObterPorId(Guid id)
         {
             using (SqlConnection db = new SqlConnection(_connection))
             {
-                return db.Get<Endereco>(id);
+                return await db.GetAsync<Endereco>(id);
             }
         }
 
-        public IEnumerable<Endereco> ObterTodos()
+        public async Task<IEnumerable<Endereco>> ObterTodos()
         {
             using(SqlConnection db = new SqlConnection(_connection))
             {
-                return db.GetAll<Endereco>(); 
+                return await  db.GetAllAsync<Endereco>(); 
             }
         }
     }

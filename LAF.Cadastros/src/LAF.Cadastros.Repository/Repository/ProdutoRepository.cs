@@ -6,49 +6,50 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LAF.Cadastros.Repository.Repository
 {
     public class ProdutoRepository : IProdutoRepository
     {
         private string _connection = @"Data Source=felipe-pc\SQLEXPRESS;Initial Catalog=LAF.Cadastros;User ID=sa;Password=119696";
-        public void Adicionar(Produto produto)
+        public async Task Adicionar(Produto produto)
         {
             using (SqlConnection db = new SqlConnection(_connection))
             {
-                db.Insert(produto);
+                await db.InsertAsync(produto);
             }
         }
 
-        public void Alterar (Produto produto)
+        public async Task Alterar (Produto produto)
         {
             using (SqlConnection db = new SqlConnection(_connection))
             {
-                db.Update(produto);
+                await db.UpdateAsync(produto);
             }
         }
 
-        public void Excluir(Produto produto)
+        public async Task Excluir(Produto produto)
         {
             using (SqlConnection db = new SqlConnection(_connection))
             {
-                db.Delete(produto);
+                await db.DeleteAsync(produto);
             }
         }
 
-        public Produto ObterPorId(Guid id)
+        public async Task<Produto> ObterPorId(Guid id)
         {
             using (SqlConnection db = new SqlConnection(_connection))
             {
-                return db.Get<Produto>(id);
+                return await db.GetAsync<Produto>(id);
             }
         }
 
-        public IEnumerable<Produto> ObterTodos()
+        public async Task<IEnumerable<Produto>> ObterTodos()
         {
             using (SqlConnection db = new SqlConnection(_connection))
             {
-                return db.GetAll<Produto>();
+                return await db.GetAllAsync<Produto>();
             }
         }
 

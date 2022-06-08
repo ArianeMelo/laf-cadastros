@@ -4,7 +4,9 @@ using LAF.Cadastros.Domain;
 using LAF.Cadastros.Domain.Interfaces.Application;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LAF.Cadastros.API.Controllers
 {
@@ -21,32 +23,43 @@ namespace LAF.Cadastros.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult ObterPorId(Guid id)
+        public async Task<IActionResult> ObterPorId(Guid id)
         {
-            Fornecedor fornecedor = _fornecedorApplication.ObterPorId(id);
+            Fornecedor fornecedor = await _fornecedorApplication.ObterPorId(id);
             
             if (fornecedor == null)
-                return NotFound();           
+                return NotFound("Fornecedor não cadastrado");           
             
                 return Ok(fornecedor);
         }
         [HttpGet]
-        public IActionResult ObterTodos()
+        public async Task<IActionResult> ObterTodos()
         {
-            return Ok (_fornecedorApplication.ObterTodos());
+            return Ok (await _fornecedorApplication.ObterTodos());
         }
 
         [HttpGet("filtros/{documento}")]
-        public IActionResult Buscar(string documento)
+        public async Task<IActionResult> Buscar(string documento)
         {
-            return Ok(_fornecedorApplication.Buscar(forn => forn.Documento == documento));
+             IEnumerable<Fornecedor> fornecedores =  await _fornecedorApplication.Buscar
+                (forn => forn.Documento == documento);
+
+            Fornecedor fornecedor = fornecedores.FirstOrDefault();
+
+            if (fornecedor == null)
+                return NotFound("Fornecedor não cadastrado");
+
+            return Ok(fornecedor);
         }
 
         [HttpPost]
-        public IActionResult Adicionar(FornecedorPostViewModel fornecedorPostViewModel)
-        {
+        public async Task<IActionResult> Adicionar(FornecedorPostViewModel fornecedorPostViewModel)
+       {
 
-            Fornecedor fornecedor = _fornecedorApplication.Buscar(forn => forn.Documento == fornecedorPostViewModel.Documento).FirstOrDefault();
+            IEnumerable<Fornecedor> fornecedores =  _fornecedorApplication.Buscar
+                (forn => forn.Documento == fornecedorPostViewModel.Documento).Result;
+
+            Fornecedor fornecedor = fornecedores.FirstOrDefault();           
 
             if (fornecedor != null)          
                 return BadRequest("Fornecedor já cadastrado");
@@ -65,41 +78,41 @@ namespace LAF.Cadastros.API.Controllers
                 Ativo = fornecedorPostViewModel.Ativo,
             };
             
-            _fornecedorApplication.Adicionar(fornecedor);
+             await _fornecedorApplication.Adicionar(fornecedor);
 
             return Ok(fornecedor);
         }
 
        
         [HttpPut("{id}")]
-        public IActionResult Alterar(Guid id, [FromBody] FornecedorPutViewModel fornecedorPutViewModel)
+        public async Task<IActionResult> Alterar(Guid id, [FromBody] FornecedorPutViewModel fornecedorPutViewModel)
         {
-            Fornecedor fornecedor = _fornecedorApplication.ObterPorId(id);
+            Fornecedor fornecedor = await _fornecedorApplication.ObterPorId(id);
 
             if (fornecedor == null)
-                return NotFound("Fornecedor não existe");
+                return NotFound("Fornecedor não existe");       
 
             fornecedor.Nome = fornecedorPutViewModel.Nome;
-            fornecedor.TipoFornecedor = fornecedorPutViewModel.TipoFornecedor;
+            fornecedor.TipoFornecedor = fornecedorPutViewModel.TipoFornecedor; 
             fornecedor.Ativo = fornecedorPutViewModel.Ativo;
            
 
-            _fornecedorApplication.Alterar(fornecedor);
+            await _fornecedorApplication.Alterar(fornecedor);
 
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Excluir (Guid id)
+        public async Task<IActionResult> Excluir (Guid id)
         {
-            Fornecedor fornecedor = _fornecedorApplication.ObterPorId(id);
+            Fornecedor fornecedor = await _fornecedorApplication.ObterPorId(id);
 
             if (fornecedor == null)
                 return NotFound("Fornecedor não existe");
            
                 fornecedor.Id = id;
 
-            _fornecedorApplication.Excluir(fornecedor);
+            await _fornecedorApplication.Excluir(fornecedor);
 
             return NoContent();
         }      

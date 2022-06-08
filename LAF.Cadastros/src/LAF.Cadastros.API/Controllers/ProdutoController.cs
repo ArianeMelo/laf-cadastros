@@ -5,6 +5,7 @@ using LAF.Cadastros.Domain.Interfaces.Application;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LAF.Cadastros.API.Controllers
 {
@@ -24,9 +25,9 @@ namespace LAF.Cadastros.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult ObterPorId(Guid id)
+        public async Task<IActionResult> ObterPorId(Guid id)
         {
-            Produto produto = _produtoApplication.ObterPorId(id);
+            Produto produto = await _produtoApplication.ObterPorId(id);
 
             if (produto == null)
                 return NotFound();
@@ -35,15 +36,15 @@ namespace LAF.Cadastros.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult ObterTodos()
+        public async Task<IActionResult> ObterTodos()
         {
-            return Ok(_produtoApplication.ObterTodos());
+            return Ok(await _produtoApplication.ObterTodos());
         }
 
         [HttpPost]
-        public IActionResult Adicionar(ProdutoPostViewModel produtoPostViewModel)
+        public async Task<IActionResult> Adicionar(ProdutoPostViewModel produtoPostViewModel)
         {
-            Fornecedor fornecedor = _fornecedorApplication.Buscar(forn => forn.Id == produtoPostViewModel.FornecedorId).FirstOrDefault();
+            Fornecedor fornecedor = await _fornecedorApplication.ObterPorId(produtoPostViewModel.FornecedorId);
 
             if (fornecedor == null)
                 return BadRequest("Fornecedor não cadastrado");
@@ -63,20 +64,21 @@ namespace LAF.Cadastros.API.Controllers
                 ProdutoAtivo = produtoPostViewModel.ProdutoAtivo
             };
 
-            _produtoApplication.Adicionar(produto);
+            await _produtoApplication.Adicionar(produto);
 
             return Ok(produto);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Alterar(Guid id, [FromBody] ProdutoPutViewModel produtoPutViewModel)
+        public async Task<IActionResult> Alterar(Guid id, [FromBody] ProdutoPutViewModel produtoPutViewModel)
         {
-            Fornecedor fornecedor = _fornecedorApplication.Buscar(forn => forn.Id == produtoPutViewModel.FornecedorId).FirstOrDefault();
+            
+            Fornecedor fornecedor = await _fornecedorApplication.ObterPorId(produtoPutViewModel.FornecedorId);
 
             if (fornecedor == null)
                 return BadRequest("Fornecedor não encontrado");
 
-            Produto produto = _produtoApplication.ObterPorId(id);
+            Produto produto = await _produtoApplication.ObterPorId(id);
 
             if (produto == null)
                 return BadRequest("Produto não encontrado");
@@ -97,22 +99,22 @@ namespace LAF.Cadastros.API.Controllers
                     ProdutoAtivo = produtoPutViewModel.ProdutoAtivo
                 };
 
-            _produtoApplication.Alterar(produto);
+            await _produtoApplication.Alterar(produto);
 
             return Ok(produto);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Excluir(Guid id)
+        public async Task<IActionResult> Excluir(Guid id)
         {
-            Produto produto = _produtoApplication.ObterPorId(id);
+            Produto produto = await _produtoApplication.ObterPorId(id);
 
             if (produto == null)
                 return BadRequest("Produto não encontrado");
 
             produto.Id = id;
             
-            _produtoApplication.Excluir(produto);
+            await _produtoApplication.Excluir(produto);
 
             return Ok();
         }

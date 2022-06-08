@@ -30,9 +30,9 @@ namespace LAF.Cadastros.API.Controllers
 
 
         [HttpGet("{id}")]
-        public IActionResult ObterPorId(Guid id)
+        public async Task<IActionResult> ObterPorId(Guid id)
         {
-            Endereco endereco = _enderecoApplication.ObterPorId(id);
+            Endereco endereco = await _enderecoApplication.ObterPorId(id);
 
             if (endereco == null)
                 return NotFound();
@@ -41,20 +41,20 @@ namespace LAF.Cadastros.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult ObterTodos()
+        public async Task<IActionResult> ObterTodos()
         {
-            return Ok(_enderecoApplication.ObterTodos());
+            return Ok(await _enderecoApplication.ObterTodos());
         }
 
         [HttpPost]
-        public IActionResult Adicionar(EnderecoPostViewModel enderecoPostViewModel)
+        public async Task<IActionResult> Adicionar(EnderecoPostViewModel enderecoPostViewModel)
         {
-            Fornecedor fornecedor = _fornecedorApplication.Buscar(forn => forn.Id == enderecoPostViewModel.FornecedorId).FirstOrDefault();
+             Fornecedor fornecedor = await _fornecedorApplication.ObterPorId(enderecoPostViewModel.FornecedorId); 
 
             if (fornecedor == null)
                 return BadRequest("Fornecedor não cadastrado");
 
-            if (String.IsNullOrEmpty(enderecoPostViewModel.Logradouro))
+            if (string.IsNullOrEmpty(enderecoPostViewModel.Logradouro))
                 return BadRequest("Endereço deve estar preenchido");
 
             if (String.IsNullOrEmpty(enderecoPostViewModel.Numero))
@@ -84,22 +84,22 @@ namespace LAF.Cadastros.API.Controllers
                 Estado = enderecoPostViewModel.Estado
             };
 
-            _enderecoApplication.Adicionar(endereco);
+            await _enderecoApplication.Adicionar(endereco);
 
             return Ok(endereco);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Alterar(Guid id, [FromBody] EnderecoPutViewModel enderecoPutViewModel)
+        public async Task<IActionResult> Alterar(Guid id, [FromBody] EnderecoPutViewModel enderecoPutViewModel)
         {
-            Endereco endereco = _enderecoApplication.ObterPorId(id);
+            Endereco endereco = await _enderecoApplication.ObterPorId(id);
 
             if (endereco == null)
-                return BadRequest("Endereço não encontrado");
+                return BadRequest("Endereço não encontrado");          
+
            
 
-            Fornecedor fornecedor = _fornecedorApplication.Buscar(forn => forn.Id == enderecoPutViewModel.FornecedorId).FirstOrDefault();
-
+            Fornecedor fornecedor = await _fornecedorApplication.ObterPorId(enderecoPutViewModel.FornecedorId);
             if (fornecedor == null)
                 return BadRequest("Fornecedor não cadastrado");
             
@@ -117,22 +117,22 @@ namespace LAF.Cadastros.API.Controllers
                 Estado = enderecoPutViewModel.Estado
             };
 
-            _enderecoApplication.Alterar(endereco);
+            await _enderecoApplication.Alterar(endereco);
 
             return Ok(endereco);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Excluir(Guid id)
+        public async Task<IActionResult> Excluir(Guid id)
         {
-            Endereco endereco = _enderecoApplication.ObterPorId(id);
+            Endereco endereco = await _enderecoApplication.ObterPorId(id);
 
             if (endereco == null)
                 return NotFound("Endereço não encontrado");
 
             endereco.Id = id;
 
-            _enderecoApplication.Excluir(endereco);
+            await _enderecoApplication.Excluir(endereco);
 
             return NoContent();
         }
